@@ -9,13 +9,25 @@
     <h1 th:text="${name}"></h1>
     <h2 th:text="${course}"></h2>
     <h3 th:text="${subject}"></h3>
-    <h4 th:text="${studentId}"></h4>
+    <h4 th:text="${id}"></h4>
     <h4 th:text="${numbers}"></h4>
     <h2 th:text="${numbers.get(0)}"></h2>
-    <h3 th:text="${birthday}"></h3>#
-    <!-- concatenation -->
+    <h3 th:text="${birthday}"></h3>
+    <!-- concat -->
     <h1 th:text="${'Hello ' + name}"></h1>
     <h2 th:text="${student.getFirstname()}"></h2>
     <h2 th:text="${student.firstname}"></h2>
+    <!-- link -->
+    <a th:href="@{https://www.google.com/}">Google</a>
+    <a th:href="@{student/register}">Register</a>
+    <!-- adding parameters to link -->
+    <a th:href="@{/student/welcome(id=3)}">Link2</a>
+    <a th:href="@{/student/welcome(id=${student.id})}">Link3</a>
+    <!-- iteration -->
+    <ul>
+        <li th:each="number : ${numbers}" th:text="${number}"></li>
+    </ul>
+    <!-- fragment -->
+    <div th:replace="fragments/footer::footer1"></div>
 </body>
 </html>

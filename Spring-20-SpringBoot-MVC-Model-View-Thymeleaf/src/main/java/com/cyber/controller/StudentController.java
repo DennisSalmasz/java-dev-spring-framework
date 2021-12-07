@@ -27,12 +27,14 @@ public class StudentController {
         model.addAttribute("subject",subject);
 
         //create random studentId - [0,1000] and show in the UI
-        int studentId = new Random().nextInt(1000);
-        model.addAttribute("studentId",studentId);
+        int id = new Random().nextInt(1000);
+        model.addAttribute("id",id);
 
         List<Integer> numbers = new ArrayList<>();
         numbers.add(4);
         numbers.add(99);
+        numbers.add(4444);
+        numbers.add(499999);
         model.addAttribute("numbers",numbers);
 
         //bind your birthday
@@ -44,4 +46,10 @@ public class StudentController {
 
         return "student/welcome";
     }
+
+    @GetMapping("register")
+    public String homePage2(){
+        return "student/register";
+    }
+
 }
