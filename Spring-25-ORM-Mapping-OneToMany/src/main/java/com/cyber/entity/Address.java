@@ -12,6 +12,6 @@ public class Address {
     private String street;
     private String zipCode;
 
-    @ManyToOne
+    @ManyToOne //FK is coming from ManyToOne
     private Person person;
 }

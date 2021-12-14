@@ -14,6 +14,6 @@ public class Person {
     private String lastName;
 
     //one person has many address
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person") //this drops third table
     private List<Address> address;
 }
