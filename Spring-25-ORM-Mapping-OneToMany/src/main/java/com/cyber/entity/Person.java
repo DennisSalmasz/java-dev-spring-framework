@@ -14,6 +14,6 @@ public class Person {
     private String lastName;
 
     //one person has many address
-    @OneToMany(mappedBy = "person") //this drops third table
+    @OneToMany(mappedBy = "person") //this drops third table - no more bidirectional !!
     private List<Address> address;
 }
