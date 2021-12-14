@@ -27,6 +27,10 @@ public class Employee extends BaseEntity{
 
     private int salary;
 
+    @OneToOne(cascade = CascadeType.ALL) //cascade -- when we do an action[merge/detach/persist/refresh/remove/all] in employees table, do the same action in department table as well.
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public Employee(String firstName, String lastName, String email, LocalDate hireDate, Gender gender, int salary) {
         this.firstName = firstName;
         this.lastName = lastName;
