@@ -41,6 +41,5 @@ public class DataGenerator implements CommandLineRunner {
         addressRepository.save(a1);
         addressRepository.save(a2);
         addressRepository.save(a3);
-
     }
 }
