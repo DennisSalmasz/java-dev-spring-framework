@@ -19,7 +19,7 @@ public class Account extends BaseEntity{
     private String country;
     private String state;
     private String city;
-    private String age;
+    private Integer age;
     @Column(name = "postal_code")
     private String postalCode;
 
@@ -29,7 +29,7 @@ public class Account extends BaseEntity{
     @OneToOne(mappedBy = "account")
     private User user;
 
-    public Account(String name, String address, String country, String state, String city, String age, String postalCode, UserRole role) {
+    public Account(String name, String address, String country, String state, String city, Integer age, String postalCode, UserRole role) {
         this.name = name;
         this.address = address;
         this.country = country;
