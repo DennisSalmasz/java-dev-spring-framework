@@ -1,8 +1,15 @@
 package com.cyber.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Address {
 
     @Id
@@ -12,6 +19,11 @@ public class Address {
     private String street;
     private String zipCode;
 
-    @ManyToOne //FK is coming from ManyToOne
+    @ManyToOne
     private Person person;
+
+    public Address(String street, String zipCode) {
+        this.street = street;
+        this.zipCode = zipCode;
+    }
 }
