@@ -1,4 +1,9 @@
 package com.cyber.repository;
 
-public interface EmployeeRepository {
+import com.cyber.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 }
