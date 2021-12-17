@@ -1,5 +1,6 @@
 package com.cyber;
 
+import com.cyber.repository.DepartmentRepository;
 import com.cyber.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,8 @@ public class Spring29OrmMappingJpqlNamedQueriesApplication {
 
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    DepartmentRepository departmentRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Spring29OrmMappingJpqlNamedQueriesApplication.class, args);
@@ -24,7 +27,10 @@ public class Spring29OrmMappingJpqlNamedQueriesApplication {
         System.out.println(employeeRepository.getEmployeeSalary());
         System.out.println(employeeRepository.getEmployeeByEmail("btrow5@technorati.com").get());
         employeeRepository.updateEmployeeJPQL(1);
-        System.out.println(employeeRepository.retrieveEmployeeSalaryGreaterThan(100000));
+        //System.out.println(employeeRepository.retrieveEmployeeSalaryGreaterThan(100000));
+        System.out.println(departmentRepository.findDannyDepartment("Kids"));
+        //System.out.println(departmentRepository.countAllDepartments());
+
     }
 
 }
