@@ -22,6 +22,9 @@ public class Spring29OrmMappingJpqlNamedQueriesApplication {
 
         System.out.println(employeeRepository.getEmployeeDetail());
         System.out.println(employeeRepository.getEmployeeSalary());
+        System.out.println(employeeRepository.getEmployeeByEmail("btrow5@technorati.com").get());
+        employeeRepository.updateEmployeeJPQL(1);
+        System.out.println(employeeRepository.retrieveEmployeeSalaryGreaterThan(100000));
     }
 
 }
