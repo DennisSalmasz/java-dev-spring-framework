@@ -13,6 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    //steps for custom security configuration:
+    //1. extend WebSecurityConfigurerAdapter class
+    //2. override configure(HttpSecurity http) [for form structure] & configure(AuthenticationManagerBuilder auth) [for authentication]
+    //3. add @Configuration & @EnableWebSecurity annotations
+    //4. create PasswordEncoder bean to encode passwords
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
