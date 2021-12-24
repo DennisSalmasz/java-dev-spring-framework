@@ -34,6 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic(); //perform basic http authentication
     }
 
+    //InMemory Authentication - not common - more prefer Database authentication !!
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
