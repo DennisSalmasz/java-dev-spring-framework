@@ -32,8 +32,8 @@ public class UserPrincipal implements UserDetails {
         });
 
         //extract list of roles
-        user.getRoleList().forEach(a -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + a); //naming convention !!
+        user.getRoleList().forEach(r -> {
+            GrantedAuthority authority = new SimpleGrantedAuthority(r); //naming convention !!
             authorityList.add(authority);
         });
 
