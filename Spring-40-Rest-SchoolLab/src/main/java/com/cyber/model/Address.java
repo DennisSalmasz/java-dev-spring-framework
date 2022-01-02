@@ -19,7 +19,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","teacher"},ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_NULL) //no null in json !!
+@JsonInclude(JsonInclude.Include.NON_NULL) //if any property value is null, you dont see it on postman!!
 public class Address extends BaseEntity{
 
     private String street;
