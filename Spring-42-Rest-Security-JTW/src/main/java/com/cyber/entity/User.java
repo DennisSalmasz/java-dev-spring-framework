@@ -28,10 +28,10 @@ public class User extends BaseEntity{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    private Boolean isVerified;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    private Boolean isVerified;
 
     @Enumerated(EnumType.STRING)
     private UserState state;

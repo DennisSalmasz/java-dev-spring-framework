@@ -16,10 +16,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
     show-sql: false
+    defer-datasource-initialization: true
 security:
   jwt:
     secret-key: ticketng
@@ -32,7 +32,4 @@ security:
 
 
 
-
-
-    #spring.jackson.serialization.fail-on-empty-beans=false
 

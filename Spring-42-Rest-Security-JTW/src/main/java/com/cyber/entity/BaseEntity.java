@@ -38,7 +38,7 @@ public class BaseEntity {
     private Integer updateUserId;
 
     @PrePersist
-    private void onPrePersist(){
+    private void onPersist(){
         this.createdDate = new Date();
         this.updatedDate = new Date();
         this.createUserId = 1;
@@ -47,7 +47,7 @@ public class BaseEntity {
 
     @PreUpdate
     private void onPreUpdate(){
-        this.createdDate = new Date();
+        this.updatedDate = new Date();
         this.updateUserId = 1;
     }
 }
