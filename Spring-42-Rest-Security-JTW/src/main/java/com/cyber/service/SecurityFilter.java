@@ -27,6 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         this.securityService = securityService;
     }
 
+    //check if security is good, if token is valid, if user is valid, if user has correct authorization
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest,
                                     HttpServletResponse httpServletResponse,

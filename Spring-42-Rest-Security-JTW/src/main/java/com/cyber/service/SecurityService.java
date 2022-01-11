@@ -20,6 +20,7 @@ public class SecurityService implements UserDetailsService{
         this.userService = userService;
     }
 
+    //hey Spring - this is the user you need to authenticate !!
     //get the user form DB, and convert it to Spring User - so that Spring can do authentication !!
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
