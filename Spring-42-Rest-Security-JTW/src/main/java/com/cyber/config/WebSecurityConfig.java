@@ -17,10 +17,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityFilter securityFilter;
 
-    //this class is for authentication
+    //this class is for authentication - this is to enable security
 
     @Override
-    @Bean // this bean is for API authentication
+    @Bean // this bean is for API authentication - no form !!
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated();
 
+        //this line runs SecurityFilter before each API call
         http.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -16,28 +16,31 @@ import java.util.function.Function;
 @Component
 public class JWTUtil {
 
-    @Value("${security.jwt.secret-key}")
+    @Value("${security.jwt.secret-key")
     private String secret = "ticketng";
 
-    public String generateToken(User user, String username){
+    //this is only for payload
+    public String generateToken(User user){
 
-        //claims = payload !!
         Map<String,Object> claims = new HashMap<>();
-        claims.put("username",user.getUsername());
-        claims.put("email",user.getEmail());
-        return createToken(claims,username);
+        claims.put("username", user.getUsername());
+        claims.put("email", user.getEmail());
+
+        return createToken(claims, user.getUsername());
     }
 
-    private String createToken(Map<String,Object> claims,String username){
-        return Jwts
-                .builder()
+    private String createToken(Map<String,Object> claims, String username){
+
+        return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-                .signWith(SignatureAlgorithm.ES256,secret)
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))//10 hours validity
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
+
+    //decode token for validation
 
     private Claims extractAllClaims(String token){
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
@@ -62,7 +65,7 @@ public class JWTUtil {
 
     public Boolean validateToken(String token, UserDetails userDetails){
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token) );
     }
 
 

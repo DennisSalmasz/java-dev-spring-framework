@@ -16,7 +16,9 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
+
+    //this entity is for DB verification
 
     @Column(nullable = false,unique = true)
     private String email;
@@ -28,10 +30,10 @@ public class User extends BaseEntity{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private Boolean isVerified;
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    private Boolean isVerified;
 
     @Enumerated(EnumType.STRING)
     private UserState state;

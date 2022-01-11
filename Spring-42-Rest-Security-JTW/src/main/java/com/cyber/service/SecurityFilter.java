@@ -38,22 +38,23 @@ public class SecurityFilter extends OncePerRequestFilter {
         String username = null;
 
         if (authorizationHeader != null) {
-            //token = authorizationHeader.replace("Bearer","");
-            token = authorizationHeader;
+            token = authorizationHeader.replace("Bearer","");
             username = jwtUtil.extractUsername(token);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = securityService.loadUserByUsername(username);
-
             if (jwtUtil.validateToken(token, userDetails) && checkIfUserIsValid(username)) {
                 UsernamePasswordAuthenticationToken currentUser =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
-                currentUser.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                currentUser
+                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+
                 SecurityContextHolder.getContext().setAuthentication(currentUser);
             }
         }
+
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 

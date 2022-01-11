@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SecurityService implements UserDetailsService{
+public class SecurityService implements UserDetailsService {
 
     private UserService userService;
 
@@ -20,15 +20,18 @@ public class SecurityService implements UserDetailsService{
         this.userService = userService;
     }
 
+    // no need UserPrincipal - since it is only API
     //hey Spring - this is the user you need to authenticate !!
     //get the user form DB, and convert it to Spring User - so that Spring can do authentication !!
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User foundUser = loadUser(username);
-        if(foundUser == null){
-            throw new UsernameNotFoundException("user not found! " + username);
-        }
-        return new org.springframework.security.core.userdetails.User(foundUser.getUsername(), foundUser.getPassword(), listAuthorities(foundUser));
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+
+        User foundUser = loadUser(s);
+
+        if (foundUser == null) throw new UsernameNotFoundException("User not found! " + s);
+
+        return new org.springframework.security.core.userdetails.User(foundUser.getUsername(),
+                foundUser.getPassword(), listAuthorities(foundUser));
     }
 
     public User loadUser(String value){
@@ -36,7 +39,8 @@ public class SecurityService implements UserDetailsService{
         return isEmail ? userService.readByEmail(value) : userService.readByUsername(value);
     }
 
-    private List<GrantedAuthority> listAuthorities(User user){
+    private List<GrantedAuthority> listAuthorities(User user) {
+
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority(user.getRole().name()));
         return grantedAuthorityList;

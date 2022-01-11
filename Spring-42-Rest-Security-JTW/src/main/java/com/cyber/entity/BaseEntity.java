@@ -17,37 +17,37 @@ public class BaseEntity {
     private Integer id;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDelete;
 
     @JsonIgnore
-    @Column(name = "created_date",nullable = false,updatable = false)
+    @Column(name = "create_date", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    private Date createDate;
 
     @JsonIgnore
-    @Column(name = "updated_date",nullable = false)
+    @Column(name = "updated_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
+    private Date updateDate;
 
     @JsonIgnore
-    @Column(name = "user_created",updatable = false)
+    @Column(name = "user_created", updatable = false)
     private Integer createUserId;
 
     @JsonIgnore
-    @Column(name = "user_updated",nullable = false)
+    @Column(name = "user_updated", nullable = false)
     private Integer updateUserId;
 
     @PrePersist
     private void onPersist(){
-        this.createdDate = new Date();
-        this.updatedDate = new Date();
+        this.createDate = new Date();
+        this.updateDate = new Date();
         this.createUserId = 1;
         this.updateUserId = 1;
     }
 
     @PreUpdate
     private void onPreUpdate(){
-        this.updatedDate = new Date();
+        this.updateDate = new Date();
         this.updateUserId = 1;
     }
 }

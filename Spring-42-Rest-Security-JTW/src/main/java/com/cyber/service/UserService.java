@@ -47,8 +47,7 @@ public class UserService {
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setIsVerified(false);
-        //user.setIsDelete(false);
-
+        user.setIsDelete(false);
         return userRepository.save(user);
     }
 
