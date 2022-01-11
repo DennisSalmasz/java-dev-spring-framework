@@ -24,11 +24,12 @@ public class SecurityService implements UserDetailsService {
     //hey Spring - this is the user you need to authenticate !!
     //get the user form DB, and convert it to Spring User - so that Spring can do authentication !!
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User foundUser = loadUser(s);
-
-        if (foundUser == null) throw new UsernameNotFoundException("User not found! " + s);
+        User foundUser = loadUser(username);
+        if (foundUser == null) {
+            throw new UsernameNotFoundException("User not found! " + username);
+        }
 
         return new org.springframework.security.core.userdetails.User(foundUser.getUsername(),
                 foundUser.getPassword(), listAuthorities(foundUser));

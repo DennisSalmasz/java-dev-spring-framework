@@ -26,8 +26,8 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<ResponseWrapper> doLogin(@RequestBody AuthenticationRequest authenticationRequest){
 
-        String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
+        String username = authenticationRequest.getUsername();
 
         User foundUser = userService.readByUsername(username);
 
