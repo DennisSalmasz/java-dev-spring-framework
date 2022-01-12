@@ -7,6 +7,8 @@ import com.cyber.entity.User;
 import com.cyber.exception.ServiceException;
 import com.cyber.service.UserService;
 import com.cyber.util.JWTUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Tag(name = "Authenticate Controller",description = "Authenticate API")
 public class AuthenticationController {
 
     @Autowired
@@ -27,6 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     @DefaultExceptionMessage(defaultMessage = "Bad Credentials")
+    @Operation(summary = "Login to application")
     public ResponseEntity<ResponseWrapper> doLogin(@RequestBody AuthenticationRequest authenticationRequest){
 
         String password = authenticationRequest.getPassword();
@@ -47,6 +51,7 @@ public class AuthenticationController {
 
     @PostMapping("/create-user")
     @DefaultExceptionMessage(defaultMessage = "This user already exist !!")
+    @Operation(summary = "Create a new user")
     public ResponseEntity<ResponseWrapper> createAccount(@RequestBody User user) throws ServiceException {
         User createdUser = userService.createUser(user);
         return ResponseEntity.ok(new ResponseWrapper("User has been created successfully",createdUser));
