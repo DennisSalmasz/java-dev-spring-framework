@@ -2,8 +2,9 @@ package com.cyber.service;
 
 import com.cyber.entity.User;
 import com.cyber.enums.UserState;
+import com.cyber.exception.ServiceException;
 import com.cyber.repository.UserRepository;
-import org.hibernate.service.spi.ServiceException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

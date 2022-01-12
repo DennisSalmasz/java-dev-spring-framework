@@ -1,5 +1,6 @@
 package com.cyber.controller;
 
+import com.cyber.annotation.DefaultExceptionMessage;
 import com.cyber.entity.AuthenticationRequest;
 import com.cyber.entity.ResponseWrapper;
 import com.cyber.entity.User;
@@ -24,6 +25,7 @@ public class AuthenticationController {
     private JWTUtil jwtUtil;
 
     @PostMapping("/authenticate")
+    @DefaultExceptionMessage(defaultMessage = "Bad Credentials")
     public ResponseEntity<ResponseWrapper> doLogin(@RequestBody AuthenticationRequest authenticationRequest){
 
         String password = authenticationRequest.getPassword();
