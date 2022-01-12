@@ -4,6 +4,7 @@ import com.cyber.annotation.DefaultExceptionMessage;
 import com.cyber.entity.AuthenticationRequest;
 import com.cyber.entity.ResponseWrapper;
 import com.cyber.entity.User;
+import com.cyber.exception.ServiceException;
 import com.cyber.service.UserService;
 import com.cyber.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class AuthenticationController {
 
         //send response & token
         return ResponseEntity.ok(new ResponseWrapper("Login Succesfull!",jwtToken));
+    }
 
+    @PostMapping("/create-user")
+    @DefaultExceptionMessage(defaultMessage = "This user already exist !!")
+    public ResponseEntity<ResponseWrapper> createAccount(@RequestBody User user) throws ServiceException {
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.ok(new ResponseWrapper("User has been created successfully",createdUser));
     }
 }

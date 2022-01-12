@@ -36,15 +36,16 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) throws ServiceException {
+
         User foundUserByEmail = readByEmail(user.getEmail());
         User foundUserByUsername = readByUsername(user.getUsername());
 
-        if(foundUserByEmail != null) {
-            throw new ServiceException("This user already exists, please change your email");
-        }
-        if(foundUserByUsername != null) {
-            throw new ServiceException("This user already exists, please change your username");
-        }
+//        if(foundUserByEmail != null) {
+//            throw new ServiceException("This user already exists, please change your email");
+//        }
+//        if(foundUserByUsername != null) {
+//            throw new ServiceException("This user already exists, please change your username");
+//        }
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setIsVerified(false);

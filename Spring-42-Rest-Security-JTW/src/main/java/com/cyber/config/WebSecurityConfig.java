@@ -33,11 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate")
+                .antMatchers("/authenticate","/create-user")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
-        //only /authenticate endpoint is given access - all rest endpoints are blocked - need token !!
+        //only /authenticate endpoint is given access to all - all rest endpoints are blocked - need token !!
 
         //this line runs SecurityFilter before each API call
         http.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
