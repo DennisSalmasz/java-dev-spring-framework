@@ -34,4 +34,5 @@ class CheckingAccountTest {
             checkingAccount.withdrawBranch(600,false);
         });
     }
+
 }
