@@ -33,7 +33,7 @@ public class ExceptionMessageHandler {
         return new ResponseEntity<>(ResponseWrapper.builder().success(false).code(HttpStatus.FORBIDDEN.value()).message(message).build(),HttpStatus.CONFLICT);
     }
 
-    // or, override Spring's exception handling method
+    // or, generic exception handling method
     @ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class, BadCredentialsException.class})
     public ResponseEntity<ResponseWrapper> genericException(Throwable e, HandlerMethod handlerMethod) {
 
