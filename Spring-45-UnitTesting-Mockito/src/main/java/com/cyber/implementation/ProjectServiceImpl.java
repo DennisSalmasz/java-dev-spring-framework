@@ -6,6 +6,7 @@ import com.cyber.entity.Project;
 import com.cyber.entity.User;
 import com.cyber.enums.Status;
 import com.cyber.mapper.MapperUtil;
+import com.cyber.mapper.ProjectMapper;
 import com.cyber.repository.ProjectRepository;
 import com.cyber.service.ProjectService;
 import com.cyber.service.TaskService;
@@ -23,33 +24,34 @@ public class ProjectServiceImpl implements ProjectService {
     private UserService userService;
     private TaskService taskService;
     private MapperUtil mapperUtil;
+    private ProjectMapper projectMapper;
 
-    public ProjectServiceImpl(@Lazy ProjectRepository projectRepository, UserService userService, TaskService taskService, MapperUtil mapperUtil) {
+    public ProjectServiceImpl( ProjectRepository projectRepository, UserService userService, TaskService taskService, MapperUtil mapperUtil, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
         this.userService = userService;
         this.taskService = taskService;
         this.mapperUtil = mapperUtil;
+        this.projectMapper = projectMapper;
     }
 
     @Override
     public ProjectDTO getByProjectCode(String code) {
         Project project = projectRepository.findByProjectCode(code);
-        return mapperUtil.convert(project,new ProjectDTO());
+        return projectMapper.convertToDto(project);
     }
 
     @Override
     public List<ProjectDTO> listAllProjects() {
         List<Project> projects = projectRepository.findAll();
-        return projects.stream().map(obj -> {return mapperUtil.convert(obj,new ProjectDTO());}).collect(Collectors.toList());
+        return projects.stream().map(obj -> mapperUtil.convert(obj,new ProjectDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public void save(ProjectDTO dto) {
+    public Project save(ProjectDTO dto) {
         dto.setProjectStatus(Status.OPEN);
-        Project obj = mapperUtil.convert(dto,new Project());
-        //need to convert assigned manager to entity as well - it is dependant !!
-        //obj.setAssignedManager(userMapper.convertToEntity(dto.getAssignedManager()));
-        projectRepository.save(obj);
+        Project obj = projectMapper.convertToEntity(dto);
+        Project project = projectRepository.save(obj);
+        return project;
     }
 
     @Override
