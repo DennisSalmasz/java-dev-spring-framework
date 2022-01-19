@@ -7,6 +7,7 @@ import com.cyber.entity.Task;
 import com.cyber.entity.User;
 import com.cyber.enums.Status;
 import com.cyber.mapper.MapperUtil;
+import com.cyber.mapper.TaskMapper;
 import com.cyber.repository.TaskRepository;
 import com.cyber.repository.UserRepository;
 import com.cyber.service.TaskService;
@@ -24,18 +25,20 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     private UserRepository userRepository;
     private MapperUtil mapperUtil;
+    private TaskMapper taskMapper;
 
-    public TaskServiceImpl(@Lazy  TaskRepository taskRepository, @Lazy UserRepository userRepository, MapperUtil mapperUtil) {
+    public TaskServiceImpl(@Lazy TaskRepository taskRepository, @Lazy UserRepository userRepository, MapperUtil mapperUtil, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.mapperUtil = mapperUtil;
+        this.taskMapper = taskMapper;
     }
 
     @Override
     public TaskDTO findById(Long id) {
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
-            return mapperUtil.convert(task.get(),new TaskDTO());
+            return taskMapper.convertToDto(task.get());
         }
         return null;
     }
