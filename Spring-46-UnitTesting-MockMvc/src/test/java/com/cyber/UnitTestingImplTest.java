@@ -7,7 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UnitTestingImplTest {
@@ -46,5 +47,17 @@ class UnitTestingImplTest {
         int actual2 = unitTesting.calculateSumUsingDataService();
         assertEquals(6,actual);
         assertEquals(15,actual2);
+    }
+
+    @Test
+    void calculateSumUsingDataServiceMockWithGenericParameter(){
+        //when(dataRepository.findById(2)).thenReturn(new int[]{10,10,10});
+        when(dataRepository.findById(anyInt())).thenReturn(new int[]{10,10,10});
+        int actual = unitTesting.calculateSumUsingDataServiceWithParameter();
+        assertEquals(30,actual);
+
+        //verify -- inside calculateSumUsingDataServiceWithParameter() method, we call another [findById()] method
+        verify(dataRepository).findById(2);
+        verify(dataRepository,times(2)).findById(2);
     }
 }
