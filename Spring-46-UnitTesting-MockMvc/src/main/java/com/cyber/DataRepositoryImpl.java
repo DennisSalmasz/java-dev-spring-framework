@@ -11,4 +11,5 @@ public class DataRepositoryImpl implements DataRepository{
     public int[] findById(int id) {
         return new int[] {10,10,10};
     }
+
 }

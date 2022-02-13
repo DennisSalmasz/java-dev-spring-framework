@@ -34,4 +34,5 @@ class WelcomeControllerTest {
                 .andExpect(content().string("welcome"))
                 .andReturn();
     }
+
 }
